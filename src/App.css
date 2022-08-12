@@ -1,0 +1,186 @@
+
+
+body{
+    padding: 5px 5px 0px 5px;
+    font-family: Montserrat;
+    list-style: none;
+}
+header{
+    background-color: #ffe0df; 
+    display: flex;
+    justify-content: center;
+}
+.logo{
+    width: 270px;
+    height: 200px;
+    margin-bottom: 15px;
+}
+.logo img{
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+nav{
+    display: flex;
+    justify-content: center;
+    background-color: #fac8c7;
+    padding: 10px;
+}
+.menu{
+    display: flex;
+    justify-content: center;
+}
+.menu li{
+    list-style: none;
+}
+.menu a{
+    margin-right: 30px;
+    padding: 2px 8px;
+}
+main{
+    text-align: center;
+}
+.imagens img{
+    cursor: pointer;
+    width: 100%;
+}
+.containerProdutos{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+.containerMaisProdutos{
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    display: none;
+}
+.containerMaisProdutos.active{
+    display:flex
+}
+.informações del{
+    color: red;
+}
+.formasDeContato{
+    margin-left: 50px;
+}
+.addSacola img{
+    width:20px;
+    height:20px;
+}
+.addSacola{
+    display: flex;
+    justify-content:right;
+    margin-top: -40px;
+}
+.addSacola img:hover{
+    width: 25px;
+    height: 25px;
+}
+.menuMobile{
+display: none;
+}
+/*estilização para quando cliente for ver o carrinho de compras*/
+
+.sacola.active p{
+    display:none;
+}
+.writtenInfo{
+    display: grid;
+    width: 150px;
+    grid-template-rows: 20px 20px 20px;
+}
+/*responsividade para celular*/
+
+@media(max-width:600px){
+    body{
+        padding: 0px 0px;
+    }
+    a,
+    a:after{
+        font-size:15px;
+    }
+    .elementos{
+        padding: 2px;
+        border-radius: 5px;
+        margin-right: 4px;
+    }
+    .elementos img{
+        display: none;
+    }
+    .produtos,.produtos:hover{
+    padding: 15px;
+    margin: 5px;
+    width: 170px;
+    height: 250px;
+    background-color:white;
+    }
+    .containerProdutos{
+        margin-bottom: 70px;
+    }
+    .containerMaisProdutos.active{
+        margin-bottom: 70px;
+    }
+    .formasDeContato{
+        margin-left: 30px;
+    }
+    
+
+
+    /*Menu para celular*/
+
+    .menu{
+        display:block;
+        position:absolute;
+        width:85%;
+        top: 55px;
+        left:0px;
+        background: white;
+        height: 0px;
+        transition:.6s;
+        visibility: hidden;
+        overflow-y: hidden;
+        z-index:100000;
+    }
+    nav.active .menuMobile{
+        width:85%;
+        background-color: white;
+        transition-duration:.2s;
+        visibility: visible;
+        z-index:100000;
+    }
+    nav.active .menu{
+        position: fixed;
+        height:100vh;
+        overflow-y: auto;
+        visibility: visible;
+    }
+    .menu a{
+        display: block;
+        padding:1rem 0;
+        margin: 0 1rem;
+        border-bottom:2px solid #ffe0df;
+        border-radius: 0px;
+    }
+    .menuMobile {
+        display:block;
+        position: fixed;
+        width: 85%;
+        top:0px;
+        left: 0px;
+        padding: 1rem 1rem;
+        cursor:pointer;
+        visibility: visible;
+    }
+    .menuMobile .close{
+        display: none;
+    }
+    .menuMobile.active .close{
+        display: block;
+    }
+    .menuMobile.active .open{
+        display: none;
+    }
+
+}
