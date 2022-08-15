@@ -8,51 +8,67 @@ import close from '../../imgs/close.svg'
 
 export default function Produtos(filter) {
   
-  const [estoque, setEstoque] = useState([])
+  const [estoque, setEstoque] = useState(null)
+  const [page, setPage] = useState(1)
   const [displayBig, setDisplayBig] = useState(false)
   const [productBig, setProductBig] =useState(null)
   const [actualImg, setActualImg] =useState(null)
 
+  const pageBack = () => {
+    var newPageCount = page-1
+    setPage(newPageCount)
+    fetchInpage(newPageCount)
+  }
+
+  const pageNext = () => {
+    var newPageCount = page+1
+    setPage(newPageCount)
+    fetchInpage(newPageCount)
+  }
+
+  const fetchInpage = (newPageCount) => {
+    let url = "http://localhost:5000/categoria"+filter.filter+"/"+newPageCount;
+      axios.get(url)
+      .then(res=>{
+        var parsed=JSON.parse(res.data)
+        setEstoque(parsed)
+        console.log(parsed.produtos)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+  }
+
   useEffect(()=>{
-    let url = "http://localhost:5000"+filter.filter;
-    console.log(url)
-    axios.get(url)
-    .then(res=>{
-      console.log(res)
-      setEstoque(res.data)
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-  },[filter])
+    setPage(1)
+    let url = "http://localhost:5000/categoria"+filter.filter;
+      axios.get(url)
+      .then(res=>{
+        var parsed=JSON.parse(res.data)
+        setEstoque(parsed)
+        console.log(parsed.produtos)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },[filter])
   return <div className="products">
     <div className="containerProdutos">
-      {
-        estoque.map(product=>
-        <div className="produtos"  key={product._id}>
-        <img src={require(`../../${product.imagem}`)} alt="arrival" onClick={()=>{
+      {estoque ? estoque.produtos.map(product=>
+        <div className="produtos"  key={product.id}>
+        <img src={`https://cdn.smartpos.app/product/${product.id}`} alt="arrival" onClick={()=>{
           setDisplayBig(!displayBig); 
           setProductBig(product.imagens);
           setActualImg(0)}
           }/>
           <div className="informações">
-            <p className="info">{product.nome}<br/>
-            {product.preço}</p>
+            <p className="info">{product.descricao}<br/>
+            R$ {product.valorVenda} </p>
             <ul className='sizes'>
-              {product.PP !== 0 && 
-              <li className='sizeIcon' key={"PP"}>PP</li>}
-              {product.P !==0 &&
-              <li className='sizeIcon' key={"P"}>P</li>}
-              {product.M !==0 &&
-              <li className='sizeIcon' key={"M"}>M</li>}
-              {product.G !==0 &&
-              <li className='sizeIcon' key={"G"}>G</li>}
-              {product.GG !==0 &&
-              <li className='sizeIcon' key={"GG"}>GG</li>}
             </ul>
           </div>
         </div>)
-      }
+      :<p>loading..</p>}
       {displayBig &&
       <div className="product-max-container">
         <div className='container-max'>
@@ -71,5 +87,14 @@ export default function Produtos(filter) {
         </div>
       </div>}
     </div>
+   {estoque?<div className='paging'>
+        {estoque.page==1?null:
+        <p className='back' onClick={pageBack}>Anterior</p>}
+        <div className='default-page'>{estoque.page}</div>
+        <p>de</p>
+        <div className='last-page'>{estoque.totalPages}</div>
+        {estoque.page==estoque.totalPages?null:
+        <p className='next' onClick={pageNext}>Próxima</p>}
+      </div>:<p>loading...</p>}
   </div>
 }

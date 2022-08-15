@@ -1,0 +1,26 @@
+.catigurias{
+    display: block;
+}
+.categorrí{
+    margin: 0px 0px 0px 0px;
+    border-radius: 0px;
+}
+.eachOf{
+    cursor: pointer;
+    font-size: 17px;
+    border-bottom:2px solid #ffe0df;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.eachOf:hover{
+    text-decoration:underline;
+}
+.title{
+    margin-top: 10px;
+}
+@media(max-width:600px){
+    .catigurias{
+        display: none;
+    }
+}

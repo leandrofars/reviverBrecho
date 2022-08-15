@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 
+import Categorias from './components/categorias/categorias';
+import Menu from './components/menu/menu'
 import Footer from './components/footer/footer'
 import Produtos from './components/produtos/produtos';
 import { ToastContainer, Zoom } from 'react-toastify';
@@ -11,13 +13,12 @@ import "./App.css"
 import logo from "./imgs/logo.png"
 import menu from "./imgs/menu.svg"
 import close from "./imgs/close.svg"
-import slogan from "./imgs/slogan.gif"
 
 function App() {
 
-  const [filter,setFilter]= useState("/")
+  const [filter,setFilter]= useState("/0")
   function homepage(){
-    setFilter("/")
+    setFilter("")
   }
 
   return (
@@ -38,21 +39,19 @@ function App() {
             <img src={logo} alt="logo" onClick={homepage}/>
         </div>
     </header>
-    <nav>
-        <div className="menuMobile">
-            <img src={menu} className="open" alt="menu"/>
-            <img src={close}className="close" alt="close"/>
-        </div>
-    </nav>
+    <Menu setFilter={setFilter}/>
     <main>
         {/*<div className="destaque">
             <div className="imagens">
                 <img src={slogan} alt="fotoChique"/>
             </div>
         </div>*/}
+        <div className='main-page'>
+        <Categorias setFilter={setFilter}/>
         <Produtos
         filter={filter}
         ></Produtos>
+        </div>
     </main>
     <Footer/>
   </div> 
