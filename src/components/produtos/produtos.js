@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import env from 'react-dotenv';
 
 import Loading from '../loading/loading';
 import SearchBar from '../searchbar/searchbar';
@@ -21,6 +22,7 @@ export default function Produtos(filter) {
   const [actualImg, setActualImg] = useState(null)
   const [arrow, setArrow] = useState("")
   const [leftArrowRule, setLeftArrow] = useState("")
+  const [error, setError] = useState(null)
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 650);
@@ -71,7 +73,7 @@ export default function Produtos(filter) {
   },[actualImg,imgs])
 
   const fetchTenant = async (id) => {
-    let url = "http://localhost:5000/imgs/"+id
+    let url = `${env.API_ENDPOINT}/imgs/${id}`
       axios.get(url)
       .then(res=>{
         var initial = [{"key":`product/${id}`}]
@@ -93,7 +95,7 @@ export default function Produtos(filter) {
       })
   } 
   const fetchInpage = (newPageCount) => {
-    let url = "http://localhost:5000/categoria"+filter.filter+"/"+newPageCount;
+    let url = `${env.API_ENDPOINT}/categoria${filter.filter}/${newPageCount}`;
       axios.get(url)
       .then(res=>{
         var parsed=JSON.parse(res.data)
@@ -106,7 +108,7 @@ export default function Produtos(filter) {
   }
   useEffect(()=>{
     setPage(1)
-    let url = "http://localhost:5000/categoria"+filter.filter;
+    let url = `${env.API_ENDPOINT}/categoria${filter.filter}`;
       axios.get(url)
       .then(res=>{
         var parsed=JSON.parse(res.data)
@@ -114,10 +116,11 @@ export default function Produtos(filter) {
         console.log(parsed.produtos)
       })
       .catch(err=>{
+        setError(err)
         console.log(err)
       })
     },[filter])
-  return <div className="products">
+  return !error?<div className="products">
     <SearchBar setEstoque={setEstoque}/>
     <div className="containerProdutos">
       {estoque ? estoque.produtos.map(product=>{
@@ -183,5 +186,5 @@ export default function Produtos(filter) {
         {estoque.page===estoque.totalPages?null:
         <p className='next' onClick={pageNext}>Próxima</p>}
       </div>:<Loading />}
-  </div>
+  </div>:<p>{String(error)}</p>
 }

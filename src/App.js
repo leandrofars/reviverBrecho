@@ -14,6 +14,7 @@ import logo from "./imgs/logo-removebg.png"
 function App() {
 
   const [filter,setFilter]= useState("/0")
+  //eslint-disable-next-line
   const [isDesktop, setDesktop] = useState(window.innerWidth > 650);
 
   const updateMedia = () => {
@@ -47,8 +48,7 @@ function App() {
             <img src={logo} alt="logo" onClick={homepage}/>
         </div>
     </header>
-    {isDesktop&&
-    <Menu setFilter={setFilter}/>}
+    <Menu setFilter={setFilter}/>
     <main>
         {/*<div className="destaque">
             <div className="imagens">

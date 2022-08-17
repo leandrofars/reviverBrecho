@@ -90,5 +90,9 @@ footer{
         margin-left: 0px;
         font-size: 14px;
     }
+    .messages{
+        bottom:20px;
+        right: 50px;
+    }
 }
 

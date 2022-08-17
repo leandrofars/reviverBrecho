@@ -15,7 +15,7 @@ export default function Categorias (setFilter) {
     },[])
 
     const fetchCategories = async () => {
-        let url = "http://localhost:5000/categories";
+        let url = `${env.API_ENDPOINT}/categories`;
         console.log(url)
         axios.get(url)
         .then(res=>{

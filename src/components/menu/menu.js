@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import env from "react-dotenv";
 
 import close from "../../imgs/close.svg"
 import slider from "../../imgs/sliders2.svg"
@@ -15,7 +16,7 @@ export default function Menu(setFilter) {
     },[])
 
     const fetchCategories = async () => {
-        let url = "http://localhost:5000/categories";
+        let url = `${env.API_ENDPOINT}/categories`;
         console.log(url)
         axios.get(url)
         .then(res=>{

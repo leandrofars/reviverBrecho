@@ -45,4 +45,11 @@
         width: 30px;
         height: 26px;
     } 
+    .searchButton img{
+      margin-left: -7px;
+    }
+    .changeFill{
+      margin-bottom: -10px;
+      width: 30px;
+    }
 }

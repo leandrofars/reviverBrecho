@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import env from "react-dotenv";
 
 import "./searchbar.css"
 import searchIcon from "../../imgs/search.svg"
@@ -13,7 +14,7 @@ export default function SearchBar(setEstoque) {
     }
 
     const submitSearch = () => {
-        let url = "http://localhost:5000/busca/"+searchValue
+        let url = `${env.API_ENDPOINT}/busca/${searchValue}`;
         axios.get(url)
         .then(res=>{
             var parsed=JSON.parse(res.data)
