@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Categorias from './components/categorias/categorias';
 import Menu from './components/menu/menu'
@@ -9,16 +9,25 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./App.css"
-
 import logo from "./imgs/logo.png"
-import menu from "./imgs/menu.svg"
-import close from "./imgs/close.svg"
+
 
 function App() {
 
   const [filter,setFilter]= useState("/0")
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 650);
+
+  const updateMedia = () => {
+    setDesktop(window.innerWidth > 650);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  });
+
   function homepage(){
-    setFilter("")
+    setFilter("/0")
   }
 
   return (
@@ -47,7 +56,8 @@ function App() {
             </div>
         </div>*/}
         <div className='main-page'>
-        <Categorias setFilter={setFilter}/>
+        {/*{isDesktop &&
+        <Categorias setFilter={setFilter}/>} ESTOU COMENTANDO ELE POIS ACHO O MEU FILTER MELHOR*/}
         <Produtos
         filter={filter}
         ></Produtos>

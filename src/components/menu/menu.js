@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import menu from "../../imgs/menu.svg"
 import close from "../../imgs/close.svg"
-import sacola from "../../imgs/sacola.svg"
+import slider from "../../imgs/sliders2.svg"
 import "./menu.css"
 
 export default function Menu(setFilter) {
@@ -30,13 +29,17 @@ export default function Menu(setFilter) {
     return <nav>
     <div className="menuMobile">
         {!displayMenu?
-        <img src={menu} className="open" alt="menu" onClick={()=>setDisplayMenu(!displayMenu)}/>:
+        <div className="open"  onClick={()=>setDisplayMenu(true)}>
+        <p>Categorias</p>
+        <img src={slider}alt="menu"/>
+        </div>:
         <div className="menu-opened">
-            <img src={close}className="close" alt="close" onClick={()=>setDisplayMenu(!displayMenu)}/>
+            <img src={close}className="close" alt="close" onClick={()=>setDisplayMenu(false)}/>
             <div className="categorias">
                 <div className="category">
+                <div className="categorys-mobile" onClick={()=>{setFilter.setFilter("/0");setDisplayMenu(false)}}>Todas</div>
                     {categories.map(category =>
-                        <div className="categorys-mobile" onClick={()=>setFilter.setFilter(`/${category.categoryCode}`)}>{category.description}</div>
+                        <div className="categorys-mobile" onClick={()=>{setFilter.setFilter(`/${category.categoryCode}`);setDisplayMenu(false)}}>{category.description}</div>
                     )}
                 </div>
             </div>
