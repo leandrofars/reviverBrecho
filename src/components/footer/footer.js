@@ -28,12 +28,12 @@ export default function Footer(){
                 </div>
                 <div className="email">
                     <img src={email} alt="email"/>
-                    emaildareviverbrechó@gmail.com
+                    reviverrbrecho@gmail.com
                 </div>
                 {displayMessage &&
                 <div className="messages">
                 <div className="closing-message">
-                <img src={close} className="changeFill" alt="close icon" onClick={()=>setDisplayMessage(false)}></img>
+                <img src={close} className="'changeFill'" alt="close icon" onClick={()=>setDisplayMessage(false)}></img>
                 </div>
                 <div class="bubble">Gostou de alguma peça? Fale conosco pelo whatsaap</div>
                 </div>}
