@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 import "./footer.css"
-import whatsapp from "../../imgs/zapIcon.svg"
+//import whatsapp from "../../imgs/zapIcon.svg"
 import instagram from "../../imgs/instagram.svg"
 import email from "../../imgs/email.svg"
 import whatsappIcon from "../../imgs/whatsaap.svg"
@@ -18,18 +18,17 @@ export default function Footer(){
                 Contatos:
             </div>
             <div className="formasDeContato">
-                <div className="zapzap">
+                {/*<div className="zapzap">
                     <img src={whatsapp} alt="whatsaap"/>
-                    {/*eslint-disable-next-line*/}
                     <a href="tel:+55-48-99859-0767"></a>(48)9 9859-0767
-                </div>
+                </div>*/}
                 <div className="instagram">
                     <img src={instagram} alt="ícone instagram"/>
-                    @vocemaisintima
+                    @reviverrbrecho
                 </div>
                 <div className="email">
                     <img src={email} alt="email"/>
-                    vocemaisintimaonline@gmail.com
+                    emaildareviverbrechó@gmail.com
                 </div>
                 {displayMessage &&
                 <div className="messages">
@@ -40,7 +39,7 @@ export default function Footer(){
                 </div>}
                 <a href="https://wa.me/554884975827" target="_blank" rel="noreferrer">
                 <div id="wa-widget-send-button">
-                    <img src={whatsappIcon}></img>
+                    <img src={whatsappIcon} alt="ícone de whatsaap"></img>
                 </div>
                 </a>
             </div>

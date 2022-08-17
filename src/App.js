@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
-import Categorias from './components/categorias/categorias';
 import Menu from './components/menu/menu'
 import Footer from './components/footer/footer'
 import Produtos from './components/produtos/produtos';
@@ -9,7 +8,7 @@ import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./App.css"
-import logo from "./imgs/logo.png"
+import logo from "./imgs/logo-removebg.png"
 
 
 function App() {
@@ -48,7 +47,8 @@ function App() {
             <img src={logo} alt="logo" onClick={homepage}/>
         </div>
     </header>
-    <Menu setFilter={setFilter}/>
+    {isDesktop&&
+    <Menu setFilter={setFilter}/>}
     <main>
         {/*<div className="destaque">
             <div className="imagens">

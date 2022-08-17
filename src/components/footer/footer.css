@@ -1,5 +1,5 @@
-.footer{
-    background-color: whitesmoke;
+footer{
+    background-color: #fae3e1;
     padding-top: 20px;
     padding-bottom:40px;
 }
@@ -7,6 +7,7 @@
     margin-left: 30px;
 }
 .formasDeContato{
+    margin-bottom: -20px;
     margin-left: 50px;
 }
 .messages{
@@ -79,6 +80,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .contato{
+        margin-top: -15px;
+        font-size: 15.5px;
+    }
+    .formasDeContato{
+        margin-bottom: -30px;
+        margin-left: 0px;
+        font-size: 14px;
     }
 }
 

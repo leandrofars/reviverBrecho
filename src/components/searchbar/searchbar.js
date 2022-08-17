@@ -17,8 +17,11 @@ export default function SearchBar(setEstoque) {
         axios.get(url)
         .then(res=>{
             var parsed=JSON.parse(res.data)
-            setEstoque.setEstoque(parsed)
             console.log(parsed)
+            if(!parsed.error){
+                setEstoque.setEstoque(parsed)
+            }
+            
         })
         .catch(err=>{
             console.log(err)

@@ -10,7 +10,6 @@ Routes.route("/categories").get(function (req, res) {
   });
   resp.on('end', () => {
       res.json(data)
-      console.log("success");
   });
   }).on("error", (err) => {
   console.log("Error: " + err.message);
@@ -26,7 +25,6 @@ Routes.route("/categoria/:id/").get(function (req, res) {
   });
   resp.on('end', () => {
       res.json(data)
-      console.log("success");
   });
   }).on("error", (err) => {
   console.log("Error: " + err.message);
@@ -42,7 +40,6 @@ Routes.route("/categoria/:id/:page").get(function (req, res) {
   });
   resp.on('end', () => {
       res.json(data)
-      console.log("success");
   });
   }).on("error", (err) => {
   console.log("Error: " + err.message);
@@ -58,7 +55,6 @@ Routes.route("/imgs/:id").get(function (req, res) {
   });
   resp.on('end', () => {
       res.json(data)
-      console.log("success");
   });
   }).on("error", (err) => {
   console.log("Error: " + err.message);
@@ -74,7 +70,6 @@ Routes.route("/busca/:search").get(function (req, res) {
   });
   resp.on('end', () => {
       res.json(data)
-      console.log("success");
   });
   }).on("error", (err) => {
   console.log("Error: " + err.message);

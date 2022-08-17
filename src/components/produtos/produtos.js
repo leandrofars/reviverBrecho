@@ -55,18 +55,19 @@ export default function Produtos(filter) {
 
   useEffect(()=>{
     console.log("running")
-    if(actualImg==length-1){
+    if(actualImg===length-1){
       console.log("adding class to right")
       setArrow("none")
     }else{
       setArrow("")
     }
-    if(actualImg==0){
+    if(actualImg===0){
       console.log("adding class to left")
       setLeftArrow("none")
     }else{
       setLeftArrow("")
     }
+    //eslint-disable-next-line
   },[actualImg,imgs])
 
   const fetchTenant = async (id) => {
@@ -76,7 +77,7 @@ export default function Produtos(filter) {
         var initial = [{"key":`product/${id}`}]
         var parsed=JSON.parse(res.data)
         if (parsed!=="notFound"){
-        parsed.map(el=>{initial.push(el)})
+        parsed.map(el=>{return initial.push(el)})
         setImgs(initial)
         setLength(initial.length)
         setActualImg(0)
@@ -135,7 +136,7 @@ export default function Produtos(filter) {
       }
       let venda;
       let initialVenda =product.valorVenda
-      if(initialVenda % 1 != 0 && !isNaN(initialVenda % 1)){
+      if(initialVenda % 1 !== 0 && !isNaN(initialVenda % 1)){
         var teste =String(initialVenda).replace(".9",",90")
         venda = teste
         console.log(teste)
@@ -165,7 +166,7 @@ export default function Produtos(filter) {
         <img src={close} alt="close"></img>
       </div>
         {imgs ?
-        <img src={"https://cdn.smartpos.app/"+imgs[actualImg].key}></img>: <Loading />}
+        <img src={"https://cdn.smartpos.app/"+imgs[actualImg].key} alt="product"></img>: <Loading />}
       </div>
       <div className={`arrow `+arrow} >
         <img src={rightArrow} alt="flecha a direita" onClick={nextPicture}/>
@@ -174,12 +175,12 @@ export default function Produtos(filter) {
     </div>}
     </div>
    {estoque?<div className='paging'>
-        {estoque.page==1?null:
+        {estoque.page===1?null:
         <p className='back' onClick={pageBack}>Anterior</p>}
         <div className='default-page'>{estoque.page}</div>
         <p>de</p>
         <div className='last-page'>{estoque.totalPages}</div>
-        {estoque.page==estoque.totalPages?null:
+        {estoque.page===estoque.totalPages?null:
         <p className='next' onClick={pageNext}>Próxima</p>}
       </div>:<Loading />}
   </div>
