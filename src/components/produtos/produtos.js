@@ -265,5 +265,5 @@ export default function Produtos(filter) {
         {estoque.page===estoque.totalPages?null:
         <p className='next' onClick={pageNext}>Próxima</p>}
       </div>:<Loading />}
-  </div>:<p>{String(error)}</p>
+  </div>:<p>Erro no servidor, reinicie a página{String(error)}</p>
 }
