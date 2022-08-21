@@ -12,6 +12,11 @@ export default function SearchBar(setEstoque) {
     const handleSearchValue = e => {
         setSearchValue(e.target.value)
     }
+    const handleKeyDown = e => {
+        if (e.key==="Enter"){
+            submitSearch()
+        }
+    }
 
     const submitSearch = () => {
         let url = `${env.API_ENDPOINT}/busca/${searchValue}`;
@@ -22,7 +27,6 @@ export default function SearchBar(setEstoque) {
             if(!parsed.error){
                 setEstoque.setEstoque(parsed)
             }
-            
         })
         .catch(err=>{
             console.log(err)
@@ -32,7 +36,7 @@ export default function SearchBar(setEstoque) {
 
     return <div className="wrap">
     <div className="search">
-       <input type="text" className="searchTerm" placeholder="Faça sua busca" onChange={handleSearchValue} />
+       <input type="text" className="searchTerm" placeholder="Faça sua busca" onChange={handleSearchValue} onKeyDown={handleKeyDown}/>
        <button type="submit" className="searchButton" onClick={submitSearch}>
          <img src={searchIcon} alt="icone de pesquisa"></img>
       </button>

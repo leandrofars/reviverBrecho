@@ -54,6 +54,9 @@ footer{
     justify-content: right;
     margin-right: -20px;
 }
+.closing-message img{
+    cursor:pointer;
+}
 .changeFill{
     cursor: pointer;
 }
@@ -93,6 +96,17 @@ footer{
     .messages{
         bottom:20px;
         right: 50px;
+    }
+    .bubble {
+        height: 40px;
+        width:200px;
+        font-size: 11px;
+        padding-top: 5px;
+    }
+    .closing-message img{
+        cursor:pointer;
+        width: 30px;
+        margin-bottom: -10px;
     }
 }
 
