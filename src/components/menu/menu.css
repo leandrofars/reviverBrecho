@@ -67,13 +67,15 @@
         left:0px;
         background-color: #ffffff;
         height: 100vh;
-        z-index:1;
+        z-index:5;
     }
     .close{
         left: calc(60%);
     }
     .open{
-        top: 50px;
+        z-index: 5;
+        position: fixed;
+        top: 35px;
         left: 5px;
     }
     .open p {

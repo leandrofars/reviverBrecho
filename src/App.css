@@ -8,6 +8,11 @@ header{
     display: flex;
     justify-content: center;
 }
+a,
+a:hover{
+    text-decoration: none;
+    color: black;
+}
 .logo{
     width: 250px;
     height: 180px;
@@ -120,7 +125,14 @@ main{
     }
     .logo{
         width: 100px;
-        height: 80px;
+        height: 70px;
         margin-bottom: 0px;
     }    
+    header{
+        position:sticky;
+        z-index:3;
+        top:0px;
+        right: 0px;
+        left: 0px;
+    }
 }

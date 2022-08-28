@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import env from 'react-dotenv';
+//import { Link } from 'react-router-dom';
 
 import Loading from '../loading/loading';
 import SearchBar from '../searchbar/searchbar';
@@ -25,6 +26,8 @@ export default function Produtos(filter) {
   const [error, setError] = useState(null)
   const [productBig,setProductBig]=useState(null)
   const [displayOnlyImg, setDisplayOnlyImg]=useState(false)
+  const [startPos, setStartPos]=useState(null)
+  const [sliding, setSliding]=useState(false)
 
 
   const updateMedia = () => {
@@ -50,6 +53,7 @@ export default function Produtos(filter) {
 
   const nextPicture = () => {
     var newPictureCount = actualImg+1
+    console.log("oi")
     setActualImg(newPictureCount)
   }
 
@@ -58,6 +62,25 @@ export default function Produtos(filter) {
     setActualImg(newPictureCount)
   }
 
+  const touchMove = () => {
+    setSliding(true)
+  }
+  const touchStart = e => {
+    setStartPos(e.changedTouches[0].clientX)
+  }
+  const touchEnd = e => {
+    handleSliding(e.changedTouches[0].clientX)
+  }
+  const handleSliding = endPos => {
+    if (sliding && actualImg!==length-1&&startPos-endPos>100){
+      nextPicture()
+    }
+    if (sliding && actualImg!==0&&startPos-endPos<100){
+      previousPicture()
+    }
+    setSliding(false)
+    console.log("start pos:" +startPos+ " end pos: " +endPos)
+  }
   const getSize = (sizeParam) => {
     let match = sizeParam.match(/[*][T?t][:][^\s]*/)
     if (match){
@@ -77,11 +100,56 @@ export default function Produtos(filter) {
     }
   }
   const getCGC = cgc => {
-    let match=cgc.match(/[*][C][G][C][:][^\s]*/)
+    let match=cgc.match(/[*][C?c][G?g][C?c][:][^\s]*/)
     if (match){
       return true
     }else{
       return false
+    }
+  }
+  const isIos = () => {
+      let  iosSys = [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPod Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+      ].includes(navigator.platform) //|| (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+      return iosSys
+  }
+  const block_overflow = () => {
+    document.body.style.overflow = 'hidden';
+    if(isIos){
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+    }
+  }
+  const unlock_overflow = () => {
+    document.body.style.overflow= 'visible';
+    if (isIos) {
+      document.body.style.position = '';
+      document.body.style.width = '';
+    }
+  }
+  const getMarca = marca => {
+    let match=marca.match(/[*][M?m][:](.*?)[*]/)
+    if (match){
+      let treatMarca = match[0].slice(1,match[0].length-1)
+      let marca = treatMarca.replace("M:","")
+      return marca
+    }else{
+      return "."
+    }
+  }
+  const getCondicao = cond => {
+    let match=cond.match(/[*][C][:](.*?)[*]/)
+    if (match){
+      let treatCond = match[0].slice(1,match[0].length-1)
+      let cond = treatCond.replace("C:","")
+      return cond
+    }else{
+      return "."
     }
   }
 
@@ -161,7 +229,7 @@ export default function Produtos(filter) {
       if(description.length>25 && isDesktop){
         description = product.descricao.slice(0,25)+"..."
       }
-      return<div className="produtos"  key={product.id} onClick={()=>{setProductBig(index);setDisplayBig(true);fetchTenant(product.id)}}>
+      return<div className="produtos"  key={product.id} onClick={()=>{setProductBig(index);setDisplayBig(true);fetchTenant(product.id);block_overflow()}}>
         {getCGC(product.observacao) && <div className='cgc'> CGC</div>}
         <img src={`https://cdn.smartpos.app/product/${product.id}`} alt="arrival"/>
           <div className="informações">
@@ -176,7 +244,7 @@ export default function Produtos(filter) {
       {displayBig&& isDesktop &&
       <div className='display-container'>
         <div className='all-about'>
-        <div className='close-display' onClick={()=>{setDisplayBig(false);setImgs(null);setProductBig(null)}}>
+        <div className='close-display' onClick={()=>{setDisplayBig(false);setImgs(null);setProductBig(null);unlock_overflow()}}>
           <img src={close} alt="close"></img>
         </div>
         <div className='container-infos'>
@@ -201,9 +269,15 @@ export default function Produtos(filter) {
               <p>Tamanho: <span className='size-cont'>{getSize(estoque.produtos[productBig].observacao)}</span> </p>
             </div>  
             <div className='stuff'>
+              <p>Marca: <span className='size-cont'>{getMarca(estoque.produtos[productBig].observacao)}</span> </p>
+            </div>  
+            <div className='stuff'>
+              <p>Condição: <span className='size-cont'>{getCondicao(estoque.produtos[productBig].observacao)}</span> </p>
+            </div>  
+            <div className='stuff'>
             <p>Descrição:</p>
             <div className='stuff'>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim sodales ut eu sem integer vitae justo. Quisque egestas diam in arcu cursus euismod quis viverra. Ultrices sagittis or. </p>
+            <p>{estoque.produtos[productBig].observacao}</p>
             </div>
             </div>
           </div>
@@ -213,12 +287,12 @@ export default function Produtos(filter) {
       {displayBig&& !isDesktop &&
        <div className='display-container'>
        <div className='all-about'>
-       <div className='close-display' onClick={()=>{setDisplayBig(false);setImgs(null);setProductBig(null)}}>
+       <div className='close-display' onClick={()=>{setDisplayBig(false);setImgs(null);setProductBig(null);unlock_overflow()}}>
          <img src={close} alt="close"></img>
        </div>
        <div className='container-infos'>
         <div className='informations'>
-        <div className='images'>
+        <div className='images' onTouchMove={touchMove} onTouchStart={touchStart} onTouchEnd={touchEnd}>
            <div className={`left-arrow-img `+leftArrowRule}>
              <img src={leftArrow} alt="flecha a esquerda" onClick={previousPicture}/>
            </div>
@@ -238,7 +312,7 @@ export default function Produtos(filter) {
              <p>Tam: <span className='size-cont'>{getSize(estoque.produtos[productBig].observacao)}</span></p>
            </div>  
            <div className='stuff-description'>
-           <p> Descrição: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim sodales ut </p>
+           <p>Descrição:  {}</p>
           </div>
            </div> 
        </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+//  import { BrowserRouter, Route, Routes} from "react-router-dom";
 
 import Menu from './components/menu/menu'
 import Footer from './components/footer/footer'
@@ -29,7 +30,6 @@ function App() {
   function homepage(){
     setFilter("/0")
   }
-
   return (
    <div>
      <ToastContainer position="top-left"
@@ -56,11 +56,15 @@ function App() {
             </div>
         </div>*/}
         <div className='main-page'>
+          <Produtos filter={filter} />
         {/*{isDesktop &&
-        <Categorias setFilter={setFilter}/>} ESTOU COMENTANDO ELE POIS ACHO O MEU FILTER MELHOR*/}
-        <Produtos
-        filter={filter}
-        ></Produtos>
+        <Categorias setFilter={setFilter}/>} ESTOU COMENTANDO ELE POIS ACHO ESSE FILTER MELHOR*/}
+        {/*<BrowserRouter>
+          <Routes>
+        <Route exact path='/produto/:id' element={<DisplayProductBig />} />
+        <Route exact path='/' element={<Produtos filter={filter} />} />
+          </Routes>
+      </BrowserRouter>*/}
         </div>
     </main>
     <Footer/>
