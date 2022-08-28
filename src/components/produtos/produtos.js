@@ -152,6 +152,13 @@ export default function Produtos(filter) {
       return "."
     }
   }
+  const getDescription = desc =>{
+    let desc1 = desc.replace(/[*][C][:](.*?)[*]/,"")
+    let desc2 = desc1.replace(/[*][M?m][:](.*?)[*]/,"")
+    let desc3 = desc2.replace(/[*][C?c][G?g][C?c][:][^\s]*/,"")
+    let desc4 = desc3.replace(/[*][T?t][:][^\s]*/,"")
+    return desc4
+  }
 
   useEffect(()=>{
     console.log("running")
@@ -275,10 +282,7 @@ export default function Produtos(filter) {
               <p>Condição: <span className='size-cont'>{getCondicao(estoque.produtos[productBig].observacao)}</span> </p>
             </div>  
             <div className='stuff'>
-            <p>Descrição:</p>
-            <div className='stuff'>
-            <p>{estoque.produtos[productBig].observacao}</p>
-            </div>
+            <p>Descrição: {getDescription(estoque.produtos[productBig].observacao)}</p>
             </div>
           </div>
         </div>
@@ -312,7 +316,7 @@ export default function Produtos(filter) {
              <p>Tam: <span className='size-cont'>{getSize(estoque.produtos[productBig].observacao)}</span></p>
            </div>  
            <div className='stuff-description'>
-           <p>Descrição:  {}</p>
+           <p>Descrição: {getDescription(estoque.produtos[productBig].observacao)}</p>
           </div>
            </div> 
        </div>
