@@ -369,9 +369,16 @@
     .stuff{
         margin-top: -15px;
     }
+    .stuffs-container{
+        display: flex;
+        justify-content: center;
+        margin-top: -15px;
+    }
     .stuff-size{
-        margin-top: -20px;
-        margin-left: -120px;
+        margin-right: 10px;
+    }
+    .stuff-cond{
+        
     }
     .containerProdutos {
         margin-bottom: 70px;

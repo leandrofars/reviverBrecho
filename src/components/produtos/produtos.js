@@ -100,7 +100,7 @@ export default function Produtos(filter) {
     }
   }
   const getCGC = cgc => {
-    let match=cgc.match(/[*][C?c][G?g][C?c][:][^\s]*/)
+    let match=cgc.match(/[*][C?c][G?g][C?c][*]]/)
     if (match){
       return true
     }else{
@@ -237,7 +237,7 @@ export default function Produtos(filter) {
         description = product.descricao.slice(0,25)+"..."
       }
       return<div className="produtos"  key={product.id} onClick={()=>{setProductBig(index);setDisplayBig(true);fetchTenant(product.id);block_overflow()}}>
-        {getCGC(product.observacao) && <div className='cgc'> CGC</div>}
+        {getCGC(product.observacao) && <div className='cgc'> Vintage</div>}
         <img src={`https://cdn.smartpos.app/product/${product.id}`} alt="arrival"/>
           <div className="informações">
             <p className="info">{description}<br/>
@@ -311,13 +311,22 @@ export default function Produtos(filter) {
         </div>
            <div className='stuff'>
              <p>R$ {getPrice(estoque.produtos[productBig].valorVenda)} </p>
-           </div>  
-           <div className='stuff-size'>
-             <p>Tam: <span className='size-cont'>{getSize(estoque.produtos[productBig].observacao)}</span></p>
-           </div>  
+           </div> 
+           <div className='stuffs-container'> 
+              <div className='stuff-size'>
+                <p>Tam: <span className='size-cont'>{getSize(estoque.produtos[productBig].observacao)}</span></p>
+              </div>  
+              <div className='stuff-cond'>
+              <p>Condição: <span className='size-cont'>{getCondicao(estoque.produtos[productBig].observacao)}</span></p>
+              </div>
+              <div className='stuff-description'>
+              <p>Marca: <span className='size-cont'>{getMarca(estoque.produtos[productBig].observacao)}</span></p>
+              </div>
+            </div>
            <div className='stuff-description'>
            <p>Descrição: {getDescription(estoque.produtos[productBig].observacao)}</p>
           </div>
+
            </div> 
        </div>
        </div>
