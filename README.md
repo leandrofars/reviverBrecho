@@ -1,5 +1,7 @@
 # reviverBrecho
-Reviver Brechó products catalog.
+Reviver Brechó catálogo de produtos.
+Esse projeto foi descontinuado a partir de setembro de 2022 e migrado para um git privado de produção, logo, existem correções e melhorias que não estão contempladas nesse repositório.
+URL do catálogo: https://reviverbrecho.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/83298718/185033049-83f78bd9-ed3e-4e4c-8b16-62c106ce6b04.png)
 
